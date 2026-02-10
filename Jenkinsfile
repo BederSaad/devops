@@ -2,21 +2,17 @@ pipeline {
     agent any
     tools {
         maven "maven"
-    }
-    environment {
-        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk" // replace with your JDK path
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        jdk "JAVA_17"
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/BederSaad/devops'
+                git branch: 'main', url: 'https://github.com/BederSaad/devops.git'
             }
         }
         stage('Build') {
             steps {
-                sh "mvn clean package -Dmaven.test.skip=true"
-            }
+                sh "mvn clean package -Dmaven.test.skip=true"            }
         }
     }
 }
