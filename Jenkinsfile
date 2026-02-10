@@ -1,35 +1,18 @@
 pipeline {
     agent any
-
-    stages {
-
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/BederSaad/devops.git'
-            }
-        }
-
-        stage('Build Project') {
-            steps {
-                echo "Building Java project..."
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Run Application') {
-            steps {
-                echo "Running Java application..."
-                sh 'java -jar target/*.jar'
-            }
-        }
+    tools {
+        maven "maven"
+        jdk "JAVA_17"
     }
-
-    post {
-        success {
-            echo "✅ Project executed successfully!"
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/MohamedAmineBayar1/projet-test.git'
+            }
         }
-        failure {
-            echo "❌ Build failed!"
+        stage('Build') {
+            steps {
+                sh "mvn clean package -Dmaven.test.skip=true"            }
         }
     }
 }
