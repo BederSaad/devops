@@ -2,7 +2,10 @@ pipeline {
     agent any
     tools {
         maven "maven"
-        jdk "JAVA_17"
+    }
+    environment {
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk" // replace with your JDK path
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
         stage('Checkout') {
@@ -12,7 +15,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "mvn clean package -Dmaven.test.skip=true"            }
+                sh "mvn clean package -Dmaven.test.skip=true"
+            }
         }
     }
 }
