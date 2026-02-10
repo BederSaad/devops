@@ -2,12 +2,12 @@ pipeline {
     agent any
     tools {
         maven "maven"
-        jdk "JAVA_21"
+        jdk "JAVA_17"
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/MohamedAmineBayar1/projet-test.git'
+                git branch: 'main', url: 'https://github.com/BederSaad/devops'
             }
         }
         stage('Build') {
