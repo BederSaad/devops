@@ -1,16 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'   // configure in Jenkins tools if needed
-        jdk 'Java'
-    }
-
     stages {
 
         stage('Clone Repository') {
             steps {
-                echo "Cloning GitHub project..."
                 git branch: 'main', url: 'https://github.com/BederSaad/devops.git'
             }
         }
@@ -39,4 +33,3 @@ pipeline {
         }
     }
 }
-
